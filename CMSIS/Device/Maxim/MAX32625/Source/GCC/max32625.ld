@@ -123,7 +123,7 @@ SECTIONS {
         *(.heap*)
         __HeapLimit = ABSOLUTE(__StackLimit);
     } > SRAM
-
+    end = . ;
     PROVIDE(__stack = __StackTop);
 
     /* Check if data + heap + stack exceeds RAM limit */

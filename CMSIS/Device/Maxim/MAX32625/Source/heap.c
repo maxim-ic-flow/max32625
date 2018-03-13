@@ -36,7 +36,7 @@
 
 #include <stdint.h>
 #include <errno.h>
-//#include <unistd.h>
+#include <unistd.h>
 
 /*
  sbrk

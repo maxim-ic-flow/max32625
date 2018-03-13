@@ -192,7 +192,7 @@ uint8_t LP_IsGPIOWakeUpSource(const gpio_cfg_t *gpio)
     } else if (gpio->port < 8) {
         gpioWokeUp = (MXC_PWRMAN->wud_seen1 >> ((gpio->port - 4) << 3)) & gpio->mask;
     } else {
-        return E_NOT_SUPPORTED;
+        return (uint8_t)E_NOT_SUPPORTED;
     }
 
     return gpioWokeUp;
