@@ -34,8 +34,8 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
- * $Date: 2016-10-10 19:27:24 -0500 (Mon, 10 Oct 2016) $
- * $Revision: 24669 $
+ * $Date: 2018-01-09 11:49:38 -0600 (Tue, 09 Jan 2018) $
+ * $Revision: 32758 $
  *
  ***************************************************************************** */
 
@@ -64,20 +64,20 @@ extern "C" {
  * Structure type for pulse train mode configuration.
  * @note       Do not use for square wave
  */
-typedef struct { 
+typedef struct {
     uint32_t bps;           /**< pulse train bit rate */
     uint32_t pattern;       /**< Output pattern to shift out, starts at LSB */
     uint8_t ptLength;       /**< Number of bits in pulse train, 0 = 32bits, 1 = non valid , 2 = 2 bits, ... */
     uint16_t loop;          /**< Number of times to repeat the train, 0 = continuous */
-    uint16_t loopDelay;     /**< Delay between loops specified in bits Example: loopDelay = 4,  delays time  = time it takes to shift out 4 bits */
+    uint16_t loopDelay;     /**< Delay between loops specified in multiples of bps */
 } pt_pt_cfg_t;
 
 /**
  * @brief      This function initializes the pulse trains to a known stopped
  *             state and sets the global PT clock scale.
- * @param      clk_scale  Scale the system clock for the global PT clock.
+ * @param      System configuration object
  */
-void PT_Init(sys_pt_clk_scale clk_scale);
+void PT_Init(const sys_cfg_ptg_t* sys_cfg);
 
 /**
  * @brief      Configures the pulse train in the specified mode.
@@ -264,7 +264,7 @@ __STATIC_INLINE uint32_t PT_GetFlags(void)
 /**
  * @brief      Clears the pulse train's interrupt flag.
  *
- * @param      mask  bits to clear, see \ref PT_INTFL_Register Register for details. 
+ * @param      mask  bits to clear, see \ref PT_INTFL_Register Register for details.
  */
 __STATIC_INLINE void PT_ClearFlags(uint32_t mask)
 {

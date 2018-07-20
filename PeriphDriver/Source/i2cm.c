@@ -1,6 +1,6 @@
 /**
  * @file
- * @brief      This file contains the function implementations for the I2CM 
+ * @brief      This file contains the function implementations for the I2CM
  *             (Inter-Integrated Circuit Master) peripheral module.
  */
 
@@ -35,8 +35,8 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
- * $Date: 2016-09-09 11:40:02 -0500 (Fri, 09 Sep 2016) $
- * $Revision: 24336 $
+ * $Date: 2018-01-18 16:10:58 -0600 (Thu, 18 Jan 2018) $
+ * $Revision: 32919 $
  *
  *************************************************************************** */
 
@@ -53,9 +53,9 @@
  * @ingroup i2cm
  * @{
  */
-    
+
 ///@cond
-// No Doxygen documentation for the items between here and endcond. 
+// No Doxygen documentation for the items between here and endcond.
 /* **** Definitions **** */
 #ifndef MXC_I2CM_TX_TIMEOUT
 #define MXC_I2CM_TX_TIMEOUT     0x5000      /**< Master Transmit Timeout in number of repetitive attempts to receive an ACK/NACK or for a transmission to occur */
@@ -158,15 +158,16 @@ static int I2CM_Rx(mxc_i2cm_regs_t *i2cm, mxc_i2cm_fifo_regs_t *fifo, uint8_t ad
 static int I2CM_CmdHandler(mxc_i2cm_regs_t *i2cm, mxc_i2cm_fifo_regs_t *fifo, i2cm_req_t *req);
 static int I2CM_ReadHandler(mxc_i2cm_regs_t *i2cm, i2cm_req_t *req, int i2cm_num);
 static int I2CM_WriteHandler(mxc_i2cm_regs_t *i2cm, i2cm_req_t *req, int i2cm_num);
-///@endcond 
+///@endcond
 //
 /* ************************************************************************* */
 int I2CM_Init(mxc_i2cm_regs_t *i2cm, const sys_cfg_i2cm_t *sys_cfg, i2cm_speed_t speed)
 {
-    int err, clki;
+    int err, clki, i2cm_num;
 
     // Check the base pointer
-    MXC_ASSERT(MXC_I2CM_GET_IDX(i2cm) >= 0);
+    i2cm_num = MXC_I2CM_GET_IDX(i2cm);
+    MXC_ASSERT(i2cm_num >= 0);
 
     // Set system level configurations
     if ((err = SYS_I2CM_Init(i2cm, sys_cfg)) != E_NO_ERROR) {
@@ -197,6 +198,9 @@ int I2CM_Init(mxc_i2cm_regs_t *i2cm, const sys_cfg_i2cm_t *sys_cfg, i2cm_speed_t
 
     // Enable tx_fifo and rx_fifo
     i2cm->ctrl |= (MXC_F_I2CM_CTRL_TX_FIFO_EN | MXC_F_I2CM_CTRL_RX_FIFO_EN);
+
+    // Set the state req pointer to NULL so it's in a known state.
+    states[i2cm_num].req = NULL;
 
     return E_NO_ERROR;
 }

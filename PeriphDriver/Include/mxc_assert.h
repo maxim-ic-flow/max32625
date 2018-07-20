@@ -1,7 +1,8 @@
 /**
- * @file 
+ * @file
  * @brief      Assertion checks for debugging.
  */
+
 /* ****************************************************************************
  * Copyright (C) 2016 Maxim Integrated Products, Inc., All Rights Reserved.
  *
@@ -34,8 +35,8 @@
  * ownership rights.
  *
  *
- * $Date: 2017-02-16 13:35:22 -0600 (Thu, 16 Feb 2017) $ 
- * $Revision: 26485 $
+ * $Date: 2018-07-03 12:08:42 -0500 (Tue, 03 Jul 2018) $ 
+ * $Revision: 35960 $
  *
  *************************************************************************** */
 

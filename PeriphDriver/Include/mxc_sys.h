@@ -29,8 +29,8 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
- * $Date: 2016-05-18 16:40:40 -0500 (Wed, 18 May 2016) $
- * $Revision: 22910 $
+ * $Date: 2017-11-08 17:58:03 -0600 (Wed, 08 Nov 2017) $
+ * $Revision: 31839 $
  *
  ******************************************************************************/
 
@@ -98,8 +98,10 @@ typedef gpio_cfg_t sys_cfg_tmr_t;
 
 /** @brief Pulse Train System Configuration Object */
 typedef gpio_cfg_t sys_cfg_pt_t;
-typedef clkman_scale_t sys_pt_clk_scale;
-
+/**
+ * Structure type for Pulse Train Clock Scale Configuration. 
+ */
+typedef sys_cfg_t sys_cfg_ptg_t;
 /***** Include Files *****/
 /* These includes require the above types to be defined first */
 #include "uart.h"
@@ -315,7 +317,7 @@ uint32_t SYS_PT_GetFreq(void);
  * @brief Initialize the global pulse train clock scale
  * @param clk_scale scale the system clock for the PT clock
  */
-void SYS_PT_Init(sys_pt_clk_scale clk_scale);
+void SYS_PT_Init(const sys_cfg_ptg_t *sys_cfg);
 
 /**
  * @brief System level initialization for Pulse Train module.

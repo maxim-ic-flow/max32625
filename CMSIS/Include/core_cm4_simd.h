@@ -1,12 +1,10 @@
-/**************************************************************************//**
+/**
  * @file     core_cm4_simd.h
  * @brief    CMSIS Cortex-M4 SIMD Header File
  * @version  V3.20
  * @date     25. February 2013
- *
- * @note
- *
  ******************************************************************************/
+
 /* Copyright (c) 2009 - 2013 ARM LIMITED
 
    All rights reserved.

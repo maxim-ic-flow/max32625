@@ -2,6 +2,7 @@
  * @file
  * @brief    Exclusive access lock utility functions.
 */
+
 /* ****************************************************************************
  * Copyright (C) 2016 Maxim Integrated Products, Inc., All Rights Reserved.
  *
@@ -33,8 +34,8 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
- * $Date: 2017-02-27 14:38:42 -0600 (Mon, 27 Feb 2017) $
- * $Revision: 26655 $
+ * $Date: 2018-06-14 18:15:19 -0500 (Thu, 14 Jun 2018) $
+ * $Revision: 35579 $
  *
  *************************************************************************** */
 

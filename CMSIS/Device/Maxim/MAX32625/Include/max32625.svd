@@ -1089,36 +1089,36 @@
               <access>read-only</access>
             </field>
             <field>
-              <name>fw_command_sysman</name>
-              <description>Reset Caused By - Firmware Commanded Reset (SysMan)</description>
+              <name>arm_lockup</name>
+              <description>Reset Caused By - ARM Core Lockup</description>
               <enumeratedValues></enumeratedValues>
               <bitRange>[17:17]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>fw_command_arm</name>
+              <description>Reset Caused By - Firmware Commanded Reset</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[18:18]</bitRange>
               <access>read-only</access>
             </field>
             <field>
               <name>watchdog_timeout</name>
               <description>Reset Caused By - Watchdog Timeout</description>
               <enumeratedValues></enumeratedValues>
-              <bitRange>[18:18]</bitRange>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>fw_command_arm</name>
-              <description>Reset Caused By - Firmware Commanded Reset (ARM Core)</description>
-              <enumeratedValues></enumeratedValues>
               <bitRange>[19:19]</bitRange>
               <access>read-only</access>
             </field>
             <field>
-              <name>arm_lockup</name>
-              <description>Reset Caused By - ARM Lockup</description>
+              <name>fw_command_sysman</name>
+              <description>Reset Caused By - Firmware Initiated Reset from SysMan</description>
               <enumeratedValues></enumeratedValues>
               <bitRange>[20:20]</bitRange>
               <access>read-only</access>
             </field>
             <field>
               <name>srstn_assertion</name>
-              <description>Reset Caused By - External System Reset</description>
+              <description>Reset Caused By - External System Reset (SRSTn)</description>
               <enumeratedValues></enumeratedValues>
               <bitRange>[21:21]</bitRange>
               <access>read-only</access>
@@ -1187,6 +1187,22 @@
               <access>read-write</access>
               <modifiedWriteValues>oneToClear</modifiedWriteValues>
             </field>
+            <field>
+              <name>vddio_reset</name>
+              <description>VDDIO Supply Reset Int Flag</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[5:5]</bitRange>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </field>
+            <field>
+              <name>vddioh_reset</name>
+              <description>VDDIOH Supply Reset Int Flag</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[6:6]</bitRange>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </field>
           </fields>
         </register>
 
@@ -1232,6 +1248,22 @@
               <bitRange>[4:4]</bitRange>
               <access>read-write</access>
             </field>
+            <field>
+              <name>vddio_reset</name>
+              <description>VDDIO Supply Reset Int Flag</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[5:5]</bitRange>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </field>
+            <field>
+              <name>vddioh_reset</name>
+              <description>VDDIOH Supply Reset Int Flag</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[6:6]</bitRange>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </field>
           </fields>
         </register>
 
@@ -1275,6 +1307,20 @@
               <description>VDDB Warning Monitor Event Input</description>
               <enumeratedValues></enumeratedValues>
               <bitRange>[4:4]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>vddio_warning</name>
+              <description>VDDIO Warning Monitor Event Input</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[5:5]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>vddioh_warning</name>
+              <description>VDDIOH Warning Monitor Event Input</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[6:6]</bitRange>
               <access>read-only</access>
             </field>
           </fields>
@@ -2744,6 +2790,27 @@
               <bitRange>[28:28]</bitRange>
               <access>read-write</access>
             </field>
+            <field>
+              <name>pwr_rcen_run</name>
+              <description>Enable 4MHz RC oscillator operation during Run Mode for LP2 and LP3</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[29:29]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwr_rcen_slp</name>
+              <description>Enable 4MHz RC oscillator operation during Sleep Mode for LP1</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[30:30]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwr_osc_select</name>
+              <description>Select Primary System Oscillator 96MHz or 4MHz</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[31:31]</bitRange>
+              <access>read-write</access>
+            </field>
           </fields>
         </register>
 
@@ -2787,6 +2854,83 @@
               <description>TVDD12 Well Switch</description>
               <enumeratedValues></enumeratedValues>
               <bitRange>[4:4]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwr_sram_nwell_sw</name>
+              <description>SRAM n-Well Switch</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[5:5]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwr_auto_mbus_gate</name>
+              <description>Automatically Set/Clear GPIO MBus Gate</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[6:6]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwr_svm_vddio_en_run</name>
+              <description>Enable VDDIO SVM Run for LP2 and LP3</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[8:8]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwr_svm_vddioh_en_run</name>
+              <description>Enable VDDIOH SVM Run for LP2 and LP3</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[10:10]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwr_retreg_src_v12</name>
+              <description>Enable VDDIO SVM Run for LP2 and LP3</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[12:12]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwr_retreg_src_vrtc</name>
+              <description>Enables VRTC Rail as Retention Power Su</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[13:13]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwr_retreg_src_v18</name>
+              <description>Enables VDD18 Rail as Retention Power Supply</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[14:14]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwr_vddio_en_iso_por</name>
+              <description>Enable VDDIO Isolation POR</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[16:16]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwr_vddioh_en_iso_por</name>
+              <description>Enable VDDIOH Isolation POR</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[17:17]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwr_lp0_core_resume_en</name>
+              <description>Enable Core Resume to Toggle during LP0</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[18:18]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwr_lp1_core_rstn_en</name>
+              <description>Enable Core RSTN to Toggle during LP1</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[19:19]</bitRange>
               <access>read-write</access>
             </field>
           </fields>
@@ -2834,6 +2978,20 @@
               <bitRange>[9:8]</bitRange>
               <access>read-write</access>
             </field>
+            <field>
+              <name>pwr_vddio_hyst</name>
+              <description>VDDIO Comparator Hysteresis Setting</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[11:10]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwr_vddioh_hyst</name>
+              <description>VDDIO Comparator Hysteresis Setting</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[13:12]</bitRange>
+              <access>read-write</access>
+            </field>
           </fields>
         </register>
 
@@ -2877,6 +3035,20 @@
               <description>Timeout before rebooting during PowerFail/BootFail events.</description>
               <enumeratedValues></enumeratedValues>
               <bitRange>[12:10]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwr_ro_div</name>
+              <description>Frequency Divider for 96MHz Relaxation Oscillator</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[18:16]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwr_rc_div</name>
+              <description>Frequency Divider for 4MHz RC Oscillator</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[21:20]</bitRange>
               <access>read-write</access>
             </field>
           </fields>
@@ -3194,6 +3366,54 @@
               <access>read-write</access>
               <modifiedWriteValues>oneToClear</modifiedWriteValues>
             </field>
+            <field>
+              <name>pwr_vddio_rst_bad</name>
+              <description>VDDIO Comparator Tripped</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[19:19]</bitRange>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </field>
+            <field>
+              <name>pwr_vddioh_rst_bad</name>
+              <description>VDDIOH Comparator Tripped</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[20:20]</bitRange>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </field>
+            <field>
+              <name>pwr_isoz_vddio_fail</name>
+              <description>VDDIO Isolation POR Tripped</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[21:21]</bitRange>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </field>
+            <field>
+              <name>pwr_isoz_vddioh_fail</name>
+              <description>VDDIOH Isolation POR Tripped</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[22:22]</bitRange>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </field>
+            <field>
+              <name>pwr_nanoring_wakeup_flag</name>
+              <description>Wakeup Triggered by Nanoring Wakeup</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[23:23]</bitRange>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </field>
+            <field>
+              <name>pwr_watchdog_rstn_flag</name>
+              <description>Power Sequencer Reset Triggered by Watchdog Flag</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[24:24]</bitRange>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </field>
           </fields>
         </register>
 
@@ -3330,9 +3550,208 @@
               <bitRange>[18:18]</bitRange>
               <access>read-write</access>
             </field>
+            <field>
+              <name>pwr_vddio_rst_bad</name>
+              <description>Mask for VDDIO Comparator Tripped</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[19:19]</bitRange>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </field>
+            <field>
+              <name>pwr_vddioh_rst_bad</name>
+              <description>Mask for VDDIOH Comparator Tripped</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[20:20]</bitRange>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </field>
+            <field>
+              <name>pwr_isoz_vddio_fail</name>
+              <description>Mask for VDDIO Isolation POR Tripped</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[21:21]</bitRange>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </field>
+            <field>
+              <name>pwr_isoz_vddioh_fail</name>
+              <description>Mask for VDDIOH Isolation POR Tripped</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[22:22]</bitRange>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </field>
+            <field>
+              <name>pwr_nanoring_wakeup_flag</name>
+              <description>Mask for Wakeup Triggered by Nanoring Wakeup</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[23:23]</bitRange>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </field>
+            <field>
+              <name>pwr_watchdog_rstn_flag</name>
+              <description>Mask for Power Sequencer Reset Triggered by Watchdog Flag</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[24:24]</bitRange>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </field>
           </fields>
         </register>
-
+        <register>
+          <name>WR_PROTECT</name>
+          <description>Critical Setting Write Protect Register</description>
+          <addressOffset>0x002C</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>bypass_seq</name>
+              <description>Write Protect Bypass Sequence Write</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[7:0]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>rtc_seq</name>
+              <description>Write Protect RTC Sequence Write</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[15:8]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>rtc</name>
+              <description>Write Protect from RTC</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[28:28]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>info</name>
+              <description>Write Protect from Info Block</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[29:29]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>bypass</name>
+              <description>Write Protect Bypass</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[30:30]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>wp</name>
+              <description>Critical Setting Write Protect</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[31:31]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RETN_CTRL0</name>
+          <description>Retention Control Register 0</description>
+          <addressOffset>0x0030</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>retn_ctrl_en</name>
+              <description>Retention Controller Enable</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>rc_rel_ccg_early</name>
+              <description>Early Core Clock Gate Release</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[1:1]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>rc_use_flc_twk</name>
+              <description>Enable Flash Controller TWake Timer</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[2:2]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>rc_poll_flash</name>
+              <description>Enable Automatic Flash Polling for Wakeup</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[3:3]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RETN_CTRL1</name>
+          <description>Retention Control Register 1</description>
+          <addressOffset>0x0034</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>rtc_twk</name>
+              <description>Retention Controller TWake Cycle Count</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[3:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PWR_MISC</name>
+          <description>Power Misc Controls</description>
+          <addressOffset>0x0038</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>invert_4_mask_bits</name>
+              <description>Invert Sense of Power Mask Flags for RTC</description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RTC_CTRL2</name>
+          <description>RTC Misc Controls</description>
+          <addressOffset>0x003C</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>timer_async_rd</name>
+              <description></description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>timer_async_wr</name>
+              <description></description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[1:1]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>timer_auto_update</name>
+              <description></description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[2:2]</bitRange>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ssb_performance</name>
+              <description></description>
+              <enumeratedValues></enumeratedValues>
+              <bitRange>[3:3]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
       </registers>
     </peripheral>
 
@@ -7787,7 +8206,7 @@
       <registers>
 
         <!-- CTRL: AES Control and Status -->
-        
+
         <register>
           <name>CTRL</name>
           <description>AES Control and Status</description>
@@ -17864,7 +18283,7 @@
     <peripheral>
       <name>ADC</name>
       <description>10-bit Analog to Digital Converter</description>
-      <!-- <groupName>ADC</groupName> -->      
+      <!-- <groupName>ADC</groupName> -->
       <interrupt>
         <name>ADC</name>
         <value>48</value>
@@ -18545,7 +18964,7 @@
                   <name>Enabled</name>
                   <description>Enable SPI Slave TX FIFO</description>
                   <value>1</value>
-                </enumeratedValue>  
+                </enumeratedValue>
               </enumeratedValues>
               <bitRange>[1:1]</bitRange>
               <access>read-write</access>
@@ -18565,7 +18984,7 @@
                   <name>Enabled</name>
                   <description>Enable SPI Slave RX FIFO</description>
                   <value>1</value>
-                </enumeratedValue>  
+                </enumeratedValue>
               </enumeratedValues>
 
               <bitRange>[2:2]</bitRange>
@@ -18596,7 +19015,7 @@
                   <name>invalid</name>
                   <description>Reserved for future use. Do not use.</description>
                   <value>3</value>
-                </enumeratedValue>  
+                </enumeratedValue>
               </enumeratedValues>
               <bitRange>[5:4]</bitRange>
               <access>read-write</access>
@@ -18622,7 +19041,7 @@
                 <enumeratedValue>
                   <name>Invert</name>
                   <description>Inverts the TX transmit clock such that outgoing data is updated on the opposite clock edge from that specified by spi_mode. Effectively, this inverts the value of the Clock Polarity bit from the value specified in spi_mode.</description>
-                  <value>1</value>              
+                  <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
               <bitRange>[20:20]</bitRange>

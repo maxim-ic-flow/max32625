@@ -183,8 +183,6 @@ int UART_Write(mxc_uart_regs_t *uart, uint8_t* data, int len);
  *             unsuccessful.
  */
 int UART_Read(mxc_uart_regs_t *uart, uint8_t* data, int len, int *num);
-int UART_Read2(mxc_uart_regs_t *uart, uint8_t* data, int len, int *num);
-
 /** @} */
 /**
  * @ingroup uart_async

@@ -29,8 +29,8 @@
  # property whatsoever. Maxim Integrated Products, Inc. retains all
  # ownership rights.
  #
- # $Date: 2016-07-06 11:38:43 -0500 (Wed, 06 Jul 2016) $ 
- # $Revision: 23595 $
+ # $Date: 2017-09-21 15:40:12 -0500 (Thu, 21 Sep 2017) $ 
+ # $Revision: 30961 $
  #
  ###############################################################################
 
@@ -108,7 +108,7 @@ endif
 
 # The command for calling the compiler.
 CC=${PREFIX}-gcc
-CPP=${PREFIX}-g++
+CXX=${PREFIX}-g++
 
 # The flags passed to the assembler.
 AFLAGS=-mthumb         \
@@ -127,36 +127,60 @@ ifeq "$(MXC_OPTIMIZE_CFLAGS)" ""
 MXC_OPTIMIZE_CFLAGS = -Os
 endif
 
-# The flags passed to the compiler.
-CFLAGS=-mthumb                                                                 \
-       -mcpu=cortex-m4                                                         \
-       -mfloat-abi=softfp                                                      \
-       -mfpu=fpv4-sp-d16                                                       \
-       -Wa,-mimplicit-it=thumb                                                 \
-       $(MXC_OPTIMIZE_CFLAGS)                                                  \
-       -ffunction-sections                                                     \
-       -fdata-sections                                                         \
-       -MD                                                                     \
-       -Wall                                                                   \
-       -Wno-format                                                             \
+# The flags passed to the C compiler.
+CFLAGS= \
+	-mthumb					\
+       -mcpu=cortex-m4				\
+       -mfloat-abi=softfp			\
+       -mfpu=fpv4-sp-d16			\
+       -Wa,-mimplicit-it=thumb			\
+       $(MXC_OPTIMIZE_CFLAGS)			\
+       -ffunction-sections			\
+       -fdata-sections				\
+       -MD					\
+       -Wall					\
+       -Wno-format				\
        -c
+
+# The flags passed to the C++ compiler.
+CXXFLAGS= \
+	-mthumb					\
+	-mcpu=cortex-m4				\
+	-mfloat-abi=softfp			\
+	-mfpu=fpv4-sp-d16			\
+	-Wa,-mimplicit-it=thumb			\
+	$(MXC_OPTIMIZE_CFLAGS)			\
+	-ffunction-sections			\
+	-fdata-sections				\
+	-MD					\
+	-Wall					\
+	-Wno-format				\
+	-fno-rtti				\
+	-fno-exceptions				\
+	-std=c++11				\
+	-c
 
 ifneq "$(TARGET)" ""
 CFLAGS+=-DTARGET=$(TARGET)
+CXXFLAGS+=-DTARGET=$(TARGET)
 endif
 
 ifneq "$(TARGET_REV)" ""
 CFLAGS+=-DTARGET_REV=$(TARGET_REV)
+CXXFLAGS+=-DTARGET_REV=$(TARGET_REV)
 endif
 
 # Exclude debug for 'release' builds
 ifneq (${MAKECMDGOALS},release)
 ifneq (${DEBUG},0)
 CFLAGS+=-g3 -ggdb -DDEBUG
+CXXFLAGS+=-g3 -ggdb -DDEBUG
+AFLAGS+=-g3 -ggdb -DDEBUG
 endif
 endif
 
 CFLAGS+=$(PROJ_CFLAGS)
+CXXFLAGS+=$(PROJ_CFLAGS)
 
 # The command for calling the library archiver.
 AR=${PREFIX}-ar
@@ -199,19 +223,20 @@ endif
 # Add the include file paths to AFLAGS and CFLAGS.
 AFLAGS+=${patsubst %,-I%,$(call fixpath,$(IPATH))}
 CFLAGS+=${patsubst %,-I%,$(call fixpath,$(IPATH))}
+CXXFLAGS+=${patsubst %,-I%,$(call fixpath,$(IPATH))}
 LDFLAGS+=${patsubst %,-L%,$(call fixpath,$(LIBPATH))}
 
 ################################################################################
 # The rule for building the object file from each C source file.
 ${BUILD_DIR}/%.o: %.c
-	@if [ 'x${ECLIPSE}' != x ]; 																			\
-	then 																									\
-		echo ${CC} ${CFLAGS} -o $(call fixpath,${@}) $(call fixpath,${<}) | sed 's/-I\/\(.\)\//-I\1:\//g' ; \
-	elif [ 'x${VERBOSE}' != x ];                                               								\
-	then 																									\
-	    echo ${CC} ${CFLAGS} -o $(call fixpath,${@}) $(call fixpath,${<});     								\
-	else                                                                       								\
-	    echo "  CC    ${<}";                                                   								\
+	@if [ 'x${ECLIPSE}' != x ]; 											\
+	then 														\
+		echo ${CC} ${CFLAGS} -o $(call fixpath,${@}) $(call fixpath,${<}) | sed 's/-I\/\(.\)\//-I\1:\//g' ;	\
+	elif [ 'x${VERBOSE}' != x ];                                               					\
+	then 														\
+	    echo ${CC} ${CFLAGS} -o $(call fixpath,${@}) $(call fixpath,${<});     					\
+	else                                                                       					\
+	    echo "  CC    ${<}";                                                   					\
 	fi
 	@${CC} ${CFLAGS} -o $(call fixpath,${@}) $(call fixpath,${<})
 ifeq "$(CYGWIN)" "True"
@@ -220,16 +245,16 @@ endif
 
 # The rule to build an object file from a C++ source file
 ${BUILD_DIR}/%.o: %.cpp
-	@if [ 'x${ECLIPSE}' != x ]; 																			\
-	then 																									\
-		echo ${CPP} ${CFLAGS} -o $(call fixpath,${@}) $(call fixpath,${<}) | sed 's/-I\/\(.\)\//-I\1:\//g' ; \
-	elif [ 'x${VERBOSE}' != x ];                                               								\
-	then 																									\
-	    echo ${CPP} ${CFLAGS} -o $(call fixpath,${@}) $(call fixpath,${<});     								\
-	else                                                                       								\
-	    echo "  CC    ${<}";                                                   								\
+	@if [ 'x${ECLIPSE}' != x ]; 											\
+	then 														\
+		echo ${CXX} ${CXXFLAGS} -o $(call fixpath,${@}) $(call fixpath,${<}) | sed 's/-I\/\(.\)\//-I\1:\//g' ;	\
+	elif [ 'x${VERBOSE}' != x ];                                               					\
+	then 														\
+	    echo ${CXX} ${CXXFLAGS} -o $(call fixpath,${@}) $(call fixpath,${<});     					\
+	else                                                                       					\
+	    echo "  CXX   ${<}";                                                   					\
 	fi
-	@${CPP} ${CFLAGS} -o $(call fixpath,${@}) $(call fixpath,${<})
+	@${CXX} ${CXXFLAGS} -o $(call fixpath,${@}) $(call fixpath,${<})
 ifeq "$(CYGWIN)" "True"
 	@sed -i -r -e 's/([A-Na-n]):/\/cygdrive\/\L\1/g' -e 's/\\([A-Za-z])/\/\1/g' ${@:.o=.d}
 endif

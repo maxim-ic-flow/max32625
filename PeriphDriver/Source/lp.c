@@ -29,8 +29,8 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
- * $Date: 2016-05-06 14:27:28 -0500 (Fri, 06 May 2016) $
- * $Revision: 22742 $
+ * $Date: 2018-06-27 11:18:59 -0500 (Wed, 27 Jun 2018) $
+ * $Revision: 35839 $
  * ******************************************************************************/
 
 /***** Includes *****/
@@ -191,9 +191,7 @@ uint8_t LP_IsGPIOWakeUpSource(const gpio_cfg_t *gpio)
         gpioWokeUp = (MXC_PWRMAN->wud_seen0 >> (gpio->port << 3)) & gpio->mask;
     } else if (gpio->port < 8) {
         gpioWokeUp = (MXC_PWRMAN->wud_seen1 >> ((gpio->port - 4) << 3)) & gpio->mask;
-    } else {
-        return (uint8_t)E_NOT_SUPPORTED;
-    }
+    } 
 
     return gpioWokeUp;
 }
@@ -328,6 +326,9 @@ int LP_EnterLP2(void)
 
 int LP_EnterLP1(void)
 {
+    /* Turn on Auto MBUS Gate to freeze gpio states */
+    MXC_PWRSEQ->reg1 |= MXC_F_PWRSEQ_REG1_PWR_AUTO_MBUS_GATE;
+
     /* Turn on retention controller */
     MXC_PWRSEQ->retn_ctrl0 |= MXC_F_PWRSEQ_RETN_CTRL0_RETN_CTRL_EN;
 

@@ -1,3 +1,8 @@
+/**
+ * @file    arm_common_tables.h
+ * @brief   External declaration for common tables like Bitreverse, reciprocal etc.
+ */
+
 /* ----------------------------------------------------------------------
 * Copyright (C) 2010-2013 ARM Limited. All rights reserved.
 *
@@ -37,6 +42,8 @@
 * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 * POSSIBILITY OF SUCH DAMAGE.
 * -------------------------------------------------------------------- */
+
+
 
 #ifndef _ARM_COMMON_TABLES_H
 #define _ARM_COMMON_TABLES_H

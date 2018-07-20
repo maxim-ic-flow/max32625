@@ -1,7 +1,3 @@
-/**
- * @file
- * @brief    Exclusive access lock utility functions.
-*/
 /* ****************************************************************************
  * Copyright (C) 2016 Maxim Integrated Products, Inc., All Rights Reserved.
  *
@@ -38,34 +34,27 @@
  *
  *************************************************************************** */
 
-/* Define to prevent redundant inclusion */
-#ifndef _MXC_LOCK_H_
-#define _MXC_LOCK_H_
-
 /* **** Includes **** */
 #include "mxc_config.h"
 #include "mxc_lock.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /* ************************************************************************** */
 int mxc_get_lock(uint32_t *lock, uint32_t value)
 {
     do {
-
+    
         // Return if the lock is taken by a different thread
-        if(__LDREXW((volatile unsigned int *)lock) != 0) {
+        if (__LDREXW((volatile unsigned long *)lock) != 0) {
             return E_BUSY;
         }
-
+        
         // Attempt to take the lock
-    } while(__STREXW(value, (volatile unsigned int *)lock) != 0);
-
+    } while (__STREXW(value, (volatile unsigned long *)lock) != 0);
+    
     // Do not start any other memory access until memory barrier is complete
     __DMB();
-
+    
     return E_NO_ERROR;
 }
 
@@ -76,8 +65,3 @@ void mxc_free_lock(uint32_t *lock)
     __DMB();
     *lock = 0;
 }
-
-#ifdef __cplusplus
-}
-#endif
-#endif /* _MXC_LOCK_H_ */

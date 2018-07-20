@@ -50,7 +50,7 @@ __initial_sp                                        ; ARMCC: name is set to work
 ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
 ; </h>
 
-Heap_Size       EQU     0x00000000
+Heap_Size       EQU     0x00000800
         
                 AREA    HEAP, NOINIT, READWRITE, ALIGN=3
 __heap_base

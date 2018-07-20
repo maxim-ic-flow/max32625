@@ -29,8 +29,8 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
- * $Date: 2016-06-17 13:05:03 -0500 (Fri, 17 Jun 2016) $
- * $Revision: 23367 $
+ * $Date: 2018-07-17 13:53:02 -0500 (Tue, 17 Jul 2018) $
+ * $Revision: 36224 $
  *
  ******************************************************************************/
 
@@ -515,10 +515,10 @@ uint32_t SYS_PT_GetFreq(void)
 }
 
 /******************************************************************************/
-void SYS_PT_Init(sys_pt_clk_scale clk_scale)
-{
+void SYS_PT_Init(const sys_cfg_ptg_t *sys_cfg)
+{    
     /* setup clock divider for pulse train clock */
-    CLKMAN_SetClkScale(CLKMAN_CLK_PT, clk_scale);
+    CLKMAN_SetClkScale(CLKMAN_CLK_PT, sys_cfg->clk_scale);
 }
 
 /******************************************************************************/
@@ -715,7 +715,7 @@ void SYS_IOMAN_UseVDDIO(const gpio_cfg_t *cfg)
 {
     unsigned int startbit = (cfg->port * 8);
     volatile uint32_t *use_vddioh_reg = &MXC_IOMAN->use_vddioh_0 + (startbit / 32);
-    *use_vddioh_reg &= ~cfg->mask << (startbit % 32);
+    *use_vddioh_reg &= ~(cfg->mask << (startbit % 32));
 }
 
 /******************************************************************************/

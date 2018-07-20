@@ -1,6 +1,6 @@
 /**
  * @file
- * @brief   Pulse Train Engine Function Implementations. 
+ * @brief   Pulse Train Engine Function Implementations.
  */
 /* *****************************************************************************
  * Copyright (C) 2016 Maxim Integrated Products, Inc., All Rights Reserved.
@@ -33,8 +33,8 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
- * $Date: 2016-09-08 17:43:36 -0500 (Thu, 08 Sep 2016) $
- * $Revision: 24327 $
+ * $Date: 2018-01-09 11:49:38 -0600 (Tue, 09 Jan 2018) $
+ * $Revision: 32758 $
  *
  **************************************************************************** */
 
@@ -43,12 +43,12 @@
 #include "pt.h"
 
 /**
- * @ingroup pulsetrain 
+ * @ingroup pulsetrain
  * @{
  */
 
 /* ************************************************************************* */
-void PT_Init(sys_pt_clk_scale clk_scale)
+void PT_Init(const sys_cfg_ptg_t* sys_cfg)
 {
     //disable all pulse trains
     MXC_PTG->enable = 0;
@@ -56,7 +56,7 @@ void PT_Init(sys_pt_clk_scale clk_scale)
     //clear all interrupts
     MXC_PTG->intfl = MXC_PTG->intfl;
 
-    SYS_PT_Init(clk_scale);
+    SYS_PT_Init(sys_cfg);
 }
 
 /* ************************************************************************* */

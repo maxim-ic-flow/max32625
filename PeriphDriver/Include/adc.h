@@ -34,8 +34,8 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
- * $Date: 2017-02-14 18:08:19 -0600 (Tue, 14 Feb 2017) $
- * $Revision: 26419 $
+ * $Date: 2017-05-04 09:49:55 -0500 (Thu, 04 May 2017) $
+ * $Revision: 27759 $
  *
  *************************************************************************** */
 
@@ -179,7 +179,7 @@ __STATIC_INLINE uint32_t ADC_GetFlags()
  */
 __STATIC_INLINE void ADC_ClearFlags(uint32_t mask)
 {
-    MXC_ADC->intr = ((MXC_ADC->intr & ADC_IF_MASK) | mask);
+    MXC_ADC->intr = ((MXC_ADC->intr & ADC_IE_MASK) | mask); // Mask off the Interrupt Enable Bits so they don't get disabled.
 }
 
 /**

@@ -35,8 +35,8 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
- * $Date: 2016-09-09 11:48:21 -0500 (Fri, 09 Sep 2016) $
- * $Revision: 24338 $
+ * $Date: 2018-01-30 19:02:42 -0600 (Tue, 30 Jan 2018) $
+ * $Revision: 33110 $
  *
  *************************************************************************** */
 
@@ -49,7 +49,7 @@
  * @ingroup flc
  * @{
  */
-    
+
 /* **** Definitions **** */
 
 /* **** Globals **** */
@@ -57,23 +57,18 @@
 /* **** Functions **** */
 
 /* ************************************************************************* */
-#if defined ( __GNUC__ )
-#undef IAR_PRAGMAS //Make sure this is not defined for GCC
-#endif
-
-#if IAR_PRAGMAS
+#if defined ( __ICCARM__ )
 // IAR memory section declaration for the in-system flash programming functions to be loaded in RAM.
 #pragma section=".flashprog"
-#endif
-#if defined ( __GNUC__ )
+#elif defined ( __GNUC__ )
 __attribute__ ((section(".flashprog")))
 #endif
 /**
- * @brief      Return the status of the busy state of the flash controller. 
+ * @brief      Return the status of the busy state of the flash controller.
  *
  * @return     0 Flash Controller is idle.
- * @return     Non-zero indicates the flash controller is performing an 
- *             erase or write request. 
+ * @return     Non-zero indicates the flash controller is performing an
+ *             erase or write request.
  */
 __STATIC_INLINE int FLC_Busy(void)
 {
@@ -81,11 +76,10 @@ __STATIC_INLINE int FLC_Busy(void)
 }
 
 /* ************************************************************************* */
-#if IAR_PRAGMAS
+#if defined ( __ICCARM__ )
 // IAR memory section declaration for the in-system flash programming functions to be loaded in RAM.
 #pragma section=".flashprog"
-#endif
-#if defined ( __GNUC__ )
+#elif defined ( __GNUC__ )
 __attribute__ ((section(".flashprog")))
 #endif
 int FLC_Init(void)
@@ -108,11 +102,10 @@ int FLC_Init(void)
 }
 
 /* ************************************************************************* */
-#if IAR_PRAGMAS
+#if defined ( __ICCARM__ )
 // IAR memory section declaration for the in-system flash programming functions to be loaded in RAM.
 #pragma section=".flashprog"
-#endif
-#if defined ( __GNUC__ )
+#elif defined ( __GNUC__ )
 __attribute__ ((section(".flashprog")))
 #endif
 int FLC_PageErase(uint32_t address, uint8_t erase_code, uint8_t unlock_key)
@@ -154,11 +147,10 @@ int FLC_PageErase(uint32_t address, uint8_t erase_code, uint8_t unlock_key)
 }
 
 /* ************************************************************************* */
-#if IAR_PRAGMAS
+#if defined ( __ICCARM__ )
 // IAR memory section declaration for the in-system flash programming functions to be loaded in RAM.
 #pragma section=".flashprog"
-#endif
-#if defined ( __GNUC__ )
+#elif defined ( __GNUC__ )
 __attribute__ ((section(".flashprog")))
 #endif
 int FLC_Write(uint32_t address, const void *data, uint32_t length, uint8_t unlock_key)
@@ -213,11 +205,10 @@ int FLC_Write(uint32_t address, const void *data, uint32_t length, uint8_t unloc
 }
 
 /* ************************************************************************* */
-#if IAR_PRAGMAS
+#if defined ( __ICCARM__ )
 // IAR memory section declaration for the in-system flash programming functions to be loaded in RAM.
 #pragma section=".flashprog"
-#endif
-#if defined ( __GNUC__ )
+#elif defined ( __GNUC__ )
 __attribute__ ((section(".flashprog")))
 #endif
 int FLC_MassErase(uint8_t erase_code, uint8_t unlock_key)

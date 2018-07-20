@@ -1,8 +1,4 @@
-/**
- * @file
- * @brief   Debug Assertion source file. 
- */
-/*******************************************************************************
+/* *****************************************************************************
  * Copyright (C) 2016 Maxim Integrated Products, Inc., All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -33,18 +29,13 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
- * $Date: 2016-10-10 19:40:22 -0500 (Mon, 10 Oct 2016) $
- * $Revision: 24671 $
+ * $Date: 2018-07-06 10:48:20 -0500 (Fri, 06 Jul 2018) $
+ * $Revision: 36029 $
  *
  *************************************************************************** */
 
 /* **** Includes **** */
 #include "mxc_config.h"
-
-/**
- * @ingroup MXC_Assertions
- * @{
- */
 
 /* **** Definitions **** */
 
@@ -55,6 +46,6 @@
 /* ************************************************************************** */
 __weak void mxc_assert(const char *expr, const char *file, int line)
 {
-    while(1) {}
+    while (1) {}
 }
-/**@} end of ingroup MXC_Assertions*/
+
